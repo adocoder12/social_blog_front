@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  /* Base */
+  --color-background: #232925;
+  --color-colorText: #f2f5f3;
+  --color-muted: #a0a0a0; /* placeholders, inactive states */
+  --color-decorator: #0fbf3e;
+
+  /* Functional */
+  --color-success: #28a745;
+  --color-error: #f0616d; /* lighter than #dc3545 so it's readable on the dark background */
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+
+  /* Neutrals */
+  --color-dark: #000000; /* true black */
+  --color-light: #f7f7f7;
+  --color-black: #1a1a1a; /* overrides Tailwind's black */
+  --color-black-02: #222222;
+  --color-black-03: #383838;
+  --color-white: #ffffff;
+  --color-white-02: #f7f7f7;
+  --color-white-03: #e8e8e8;
+
+  /* Font */
+  --font-mono: "Courier Prime", ui-monospace, monospace;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Headings */
+  --text-h1: 3.375rem; /* 54px: page and hero titles */
+  --text-h1--line-height: 1.05;
+  --text-h2: 2.5rem; /* 40px: section titles */
+  --text-h2--line-height: 1.15;
+  --text-h3: 1.5rem; /* 24px: subheadings */
+  --text-h3--line-height: 1.2;
+  --text-h4: 1.3125rem; /* 21px: card titles */
+  --text-h4--line-height: 1.28;
+  --text-h5: 1.125rem; /* 18px: small headings, UI labels */
+  --text-h5--line-height: 1.38;
+  --text-h6: 1.0625rem; /* 17px */
+  --text-h6--line-height: 1.45;
+
+  /* Text */
+  --text-body: 1rem; /* 16px: paragraphs */
+  --text-body--line-height: 1.55;
+  --text-small: 0.875rem; /* 14px: captions, meta, buttons */
+  --text-small--line-height: 1.35;
+  --text-somep: 1rem; /* same as body */
+  --text-somep--line-height: 1.2;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-colorText);
+    font-family: var(--font-mono);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+}

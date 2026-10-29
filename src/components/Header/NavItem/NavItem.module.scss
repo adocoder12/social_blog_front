@@ -1,0 +1,45 @@
+@layer components {
+  .link {
+    position: relative;
+    display: block;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-weight: var(--font-weight-regular);
+    // Hidden on mobile until the menu opens; always visible on desktop
+    opacity: 0;
+    translate: 0 2.5rem;
+    transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (width >= 64rem) {
+      opacity: 1;
+      translate: none;
+    }
+
+    &:hover .underline {
+      width: 100%;
+    }
+  }
+
+  .mobile {
+    opacity: 1;
+    translate: none;
+  }
+
+  .active {
+    color: var(--color-decorator);
+  }
+
+  .inactive {
+    color: var(--color-colorText);
+  }
+
+  .underline {
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-decorator);
+    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

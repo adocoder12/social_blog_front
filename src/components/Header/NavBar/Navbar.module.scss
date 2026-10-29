@@ -1,0 +1,53 @@
+@layer components {
+  // Mobile: full-screen panel sliding down from the top
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 55000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    padding: 8rem 2rem 2rem;
+    background-color: var(--color-background);
+    translate: 0 -100%;
+    visibility: hidden;
+    transition: translate 700ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    // Desktop: static row inside the header
+    @media (width >= 64rem) {
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      padding: 0;
+      background-color: transparent;
+      translate: none;
+      visibility: visible;
+    }
+  }
+
+  .open {
+    translate: none;
+    visibility: visible;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+    list-style: none;
+    text-transform: uppercase;
+
+    @media (width >= 64rem) {
+      flex-direction: row;
+      align-items: center;
+      column-gap: 2.5rem;
+      row-gap: 0;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Keep the build context small: the image installs and builds its own copies
+node_modules
+dist
+dist-ssr
+.tanstack
+
+# Env files stay out of the image; compose passes what the container needs
+.env
+.env.*
+
+# Git, editor and OS files
+.git
+.vscode
+.idea
+.DS_Store
+*.log
+*.local
+
+# Docker files aren't needed inside the image
+Dockerfile
+.dockerignore
+docker-compose.yml

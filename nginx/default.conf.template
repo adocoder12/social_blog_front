@@ -1,0 +1,33 @@
+server {
+    listen 80;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Docker's internal DNS, so nginx finds the API again after it restarts
+    resolver 127.0.0.11 valid=10s;
+
+    # Forward API calls to the Go backend (same origin, so no CORS needed)
+    location /api/ {
+        set $api ${API_TARGET};
+        proxy_pass $api;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # Cache built assets (Vite gives them new names on every build)
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Always check for a new index.html
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+
+    # Send every other route to index.html so TanStack Router works on refresh
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

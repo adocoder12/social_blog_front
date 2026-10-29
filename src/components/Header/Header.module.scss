@@ -1,0 +1,99 @@
+/* Wrapped in the components layer so Tailwind utilities passed in can still override it */
+@layer components {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    padding-block: 1.5rem;
+    background-color: var(--color-background);
+    transition:
+      padding-block 300ms ease-in-out,
+      background-color 300ms ease-in-out,
+      box-shadow 300ms ease-in-out;
+  }
+
+  .scrolled {
+    padding-block: 1rem;
+    background-color: color-mix(
+      in oklab,
+      var(--color-background) 85%,
+      transparent
+    );
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  /* Same width and padding as .main-container */
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+
+    @media (width >= 48rem) {
+      padding-inline: 3.25rem;
+    }
+  }
+
+  .brand {
+    position: relative;
+    z-index: 20; /* stays above the mobile menu */
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    color: var(--color-foreground);
+  }
+
+  .toggleWrapper {
+    position: relative;
+    z-index: 20; /* stays above the mobile menu */
+    display: flex;
+    align-items: center;
+
+    @media (width >= 64rem) {
+      display: none;
+    }
+  }
+
+  .toggle {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    transition: rotate 400ms ease;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-decorator);
+    }
+  }
+
+  .open {
+    rotate: 90deg;
+  }
+
+  .icon {
+    width: 1.875rem;
+    height: 1.875rem;
+    color: var(--color-foreground);
+  }
+
+  /* No animations for people who turned them off in their system settings */
+  @media (prefers-reduced-motion: reduce) {
+    .header,
+    .toggle {
+      transition: none;
+    }
+  }
+}

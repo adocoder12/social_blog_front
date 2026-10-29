@@ -1,0 +1,20 @@
+services:
+  web:
+    container_name: social-blog-web
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${WEB_PORT:-3000}:80"
+    environment:
+      # Separate from API_TARGET, which `npm run dev` uses with localhost
+      API_TARGET: ${DOCKER_API_TARGET:?Set DOCKER_API_TARGET in .env}
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    external: true
+    # Network the API container runs on; set API_NETWORK in .env
+    name: ${API_NETWORK:?Set API_NETWORK in .env}

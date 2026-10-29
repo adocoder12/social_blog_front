@@ -1,19 +1,22 @@
-# Base setup for react app — Frontend
+# social_blog — Frontend
+
+React frontend for [social_blog](https://github.com/adocoder12/social_blog), a Go + Postgres blog API.
 
 ## Tools
 
-| Tool                | What it's for                                           |
-| ------------------- | ------------------------------------------------------- |
-| **React 19**        | UI                                                      |
-| **TypeScript**      | Types for API data and components                       |
-| **Vite 8**          | Dev server and build                                    |
-| **TanStack Router** | File-based routing: files in `src/routes/` become URLs  |
-| **TanStack Query**  | Server state: fetching, caching and mutations for posts |
-| **Zustand**         | Client state: current user id, search text              |
-| **Tailwind CSS v4** | Styling with utility classes                            |
-| **Oxlint**          | Linting, including the TanStack Query rules             |
-| **Prettier**        | Formatting                                              |
-| **Docker + nginx**  | Serves the built app and forwards `/api` to the Go API  |
+| Tool                   | What it's for                                           |
+| ---------------------- | ------------------------------------------------------- |
+| **React 19**           | UI                                                      |
+| **TypeScript 7**       | Types for API data and components                       |
+| **Vite 8**             | Dev server and build                                    |
+| **TanStack Router**    | File-based routing: files in `src/routes/` become URLs  |
+| **TanStack Query**     | Server state: fetching, caching and mutations for posts |
+| **Zustand**            | Client state: current user id, search text              |
+| **Sass (CSS Modules)** | One `.module.scss` per component                        |
+| **Tailwind CSS v4**    | Theme tokens and one-off utility classes                |
+| **Oxlint**             | Linting, including the TanStack Query rules             |
+| **Prettier**           | Formatting                                              |
+| **Docker + nginx**     | Serves the built app and forwards `/api` to the Go API  |
 
 ### The state rule
 
@@ -43,12 +46,16 @@ To check the connection, open http://localhost:5173/api/v1/health.
 
 ## Environment variables
 
-| Variable     | Used by                       | Default                 |
-| ------------ | ----------------------------- | ----------------------- |
-| `API_TARGET` | `npm run dev` (Vite proxy)    | `http://localhost:8080` |
-| `WEB_PORT`   | Docker, port for the frontend | `3000`                  |
+All of them live in `.env` (not committed). `.env.example` lists them.
 
-In Docker, the API address is set in `docker-compose.yml` instead (`http://golpher-api:8080`).
+| Variable            | Used by                                       | Example                     |
+| ------------------- | --------------------------------------------- | --------------------------- |
+| `API_TARGET`        | `npm run dev` (Vite proxy)                    | `http://localhost:8080`     |
+| `DOCKER_API_TARGET` | Docker: the API as the container sees it      | `http://golpher-api:8080`   |
+| `API_NETWORK`       | Docker: the API's network the container joins | `social_blog_costa-network` |
+| `WEB_PORT`          | Docker: port for the frontend                 | `3000`                      |
+
+`DOCKER_API_TARGET` and `API_NETWORK` are required for Docker; `make up` stops with a message if either is empty.
 
 ## Scripts
 
@@ -60,12 +67,6 @@ In Docker, the API address is set in `docker-compose.yml` instead (`http://golph
 | `npm run lint`    | Run Oxlint                      |
 | `npm run format`  | Format `src/` with Prettier     |
 
-`format` needs this line in the `scripts` of `package.json`:
-
-```json
-"format": "prettier --write src"
-```
-
 ## Project structure
 
 ```
@@ -74,39 +75,44 @@ social_Blog_front/
 │   └── default.conf.template   # serves the app, forwards /api to the Go API
 ├── public/                     # static files copied as is
 ├── src/
-│   ├── api/
-│   │   ├── client.ts           # fetch wrapper: /api/v1 base, handles {data}/{error}
-│   │   └── posts.ts            # getPosts, getPost, createPost, updatePost, deletePost
-│   ├── components/             # reusable UI: PostCard, PostForm, CommentList...
-│   ├── hooks/
-│   │   └── usePosts.ts         # TanStack Query hooks for posts
+│   ├── api/                    # plain fetch functions, one file per resource
+│   ├── assets/                 # images imported from code
+│   ├── components/             # reusable UI, each with its own .module.scss
+│   │   ├── Footer/
+│   │   ├── Header/             # Header, NavBar/, NavItem/
+│   │   ├── NotFoundPage/
+│   │   └── UI/icons/
+│   ├── css/
+│   │   ├── index.css           # Tailwind import, @theme tokens, base and layout styles
+│   │   └── variables.css       # older copy of the theme, not imported
+│   ├── hooks/                  # TanStack Query hooks
 │   ├── routes/                 # one file per page
-│   │   ├── __root.tsx          # layout around every page
+│   │   ├── __root.tsx          # layout around every page, 404 page
 │   │   ├── index.tsx           # /
-│   │   └── posts/
-│   │       └── $postId.tsx     # /posts/:postId
-│   ├── store/
-│   │   └── uiStore.ts          # Zustand store
-│   ├── types/
-│   │   └── index.ts            # Post, Comment, NewPost, PostPatch
-│   ├── index.css               # Tailwind import and theme
-│   ├── main.tsx                # QueryClient + router setup
+│   │   └── profile.tsx         # /profile
+│   ├── store/                  # Zustand stores
+│   ├── types/                  # shared types mirroring the Go DTOs
+│   ├── utils/
+│   │   └── cn.ts               # clsx + tailwind-merge
+│   ├── main.tsx                # global CSS, QueryClient and router setup
 │   └── routeTree.gen.ts        # generated by the router plugin, don't edit
 ├── .dockerignore
 ├── .env                        # not committed
 ├── .env.example
+├── .gitignore
 ├── .nvmrc
 ├── .oxlintrc.json
-├── .prettierrc
+├── .prettierignore             # skips routeTree.gen.ts
+├── CLAUDE.MD                   # project rules for Claude Code
 ├── docker-compose.yml
 ├── Dockerfile
 ├── index.html
 ├── Makefile
 ├── package.json
 ├── tsconfig.json               # points to tsconfig.app.json and tsconfig.node.json
-├── tsconfig.app.json           # app config, includes the @/ alias
+├── tsconfig.app.json           # app config, including the import aliases
 ├── tsconfig.node.json
-└── vite.config.ts              # router plugin, Tailwind, @/ alias, /api proxy
+└── vite.config.ts              # router plugin, React, Tailwind, /api proxy
 ```
 
 ### How the folders work together
@@ -120,19 +126,52 @@ route → hook (TanStack Query) → api → Vite proxy or nginx → Go API
 - **api/** has plain fetch functions, no React.
 - **store/** is for screen state only.
 
-Imports use the `@/` alias for `src/`, for example `import { usePosts } from "@/hooks/usePosts"`.
+### Import aliases
+
+Each folder has its own alias, set in `tsconfig.app.json` (Vite reads it from there). There is no `@/` alias.
+
+| Alias           | Folder               |
+| --------------- | -------------------- |
+| `@api/*`        | `src/api/`           |
+| `@hooks/*`      | `src/hooks/`         |
+| `@store/*`      | `src/store/`         |
+| `@utils/*`      | `src/utils/`         |
+| `@components/*` | `src/components/`    |
+| `@routes/*`     | `src/routes/`        |
+| `@styles/*`     | `src/css/`           |
+| `@app-types`    | `src/types/index.ts` |
+
+For example: `import Footer from "@components/Footer/Footer"`.
+
+## Styling
+
+**SCSS modules for components, Tailwind for one-off tweaks.**
+
+- Each component has its own `ComponentName.module.scss` next to it, imported as `styles`.
+- Wrap the whole module in `@layer components { ... }`, so Tailwind classes still win when you add them.
+- Read the theme through its CSS variables: `var(--color-decorator)`, `var(--text-small)`, `var(--font-mono)`. The theme is the `@theme static` block in `src/css/index.css`.
+- To mix in Tailwind, pass classes through a `className` prop and combine them with `cn(styles.x, className)`.
+
+```tsx
+import { cn } from "@utils/cn";
+import styles from "./Card.module.scss";
+
+export default function Card({ className }: { className?: string }) {
+  return <div className={cn(styles.card, className)}>…</div>;
+}
+```
 
 ## Routing
 
-Adding a page means adding a file to `src/routes/`. The router plugin updates `routeTree.gen.ts` while `npm run dev` runs.
+Adding a page means adding a file to `src/routes/` and a link in `navLinks` in `Header.tsx`. The router plugin updates `routeTree.gen.ts` while `npm run dev` runs.
 
-| File                       | URL        |
+| Example file               | URL        |
 | -------------------------- | ---------- |
 | `routes/index.tsx`         | `/`        |
 | `routes/about.tsx`         | `/about`   |
 | `routes/posts/$postId.tsx` | `/posts/5` |
 
-`$` marks a URL parameter, read with `Route.useParams()`. Commit `routeTree.gen.ts`, but never edit it by hand.
+`$` marks a URL parameter, read with `Route.useParams()`. Commit `routeTree.gen.ts`, but never edit it by hand. `npm run build` type-checks before Vite runs, so the build fails without it.
 
 ## Backend API
 
@@ -159,15 +198,19 @@ The frontend container joins the API's Docker network and reaches it by containe
    ```bash
    docker compose up -d
    ```
-2. Check the network name with `docker network ls`. It should be `social_blog_costa-network`. If it isn't, update `name:` in `docker-compose.yml`.
+2. Find the API's network and container name with `docker network ls` and `docker ps`, and set them in `.env`:
+   ```bash
+   API_NETWORK=social_blog_costa-network
+   DOCKER_API_TARGET=http://golpher-api:8080
+   ```
 3. Start the frontend:
    ```bash
    make up
    ```
 
-Open http://localhost:3000.
+Open http://localhost:3000. After a few seconds `docker ps` shows the container as `(healthy)`.
 
-The image is built in two stages: Node 26 builds the app, then only the `dist/` files are copied into nginx 1.30. nginx serves the app, sends every unknown route to `index.html` so routing works on refresh, and forwards `/api` to the Go API.
+The image is built in two stages: Node 26 builds the app, then only the `dist/` files are copied into nginx 1.30. nginx serves the app, sends every unknown route to `index.html` so routing works on refresh, and forwards `/api` to `DOCKER_API_TARGET`. `.dockerignore` keeps `node_modules`, `dist` and `.env` files out of the build.
 
 To get the latest security patches for the base images, rebuild with:
 
@@ -189,6 +232,7 @@ docker compose build --pull --no-cache
 | `make rebuild` | Rebuild without cache                       |
 | `make clean`   | Remove the image, `dist` and `node_modules` |
 
-## Known warnings
+## Tooling notes
 
-`npm install` shows peer dependency warnings about TypeScript 7. They come from `@tanstack/eslint-plugin-query`, which uses typescript-eslint, and typescript-eslint doesn't officially support TypeScript 7 yet. The install still succeeds and the lint rules work.
+- `@tanstack/eslint-plugin-query` (run by Oxlint) depends on typescript-eslint, which doesn't officially support TypeScript 7 yet. The `overrides` in `package.json` let it use TypeScript 7, so `npm install` has no peer warnings. Remove them once typescript-eslint supports TS 7.
+- `npm install` may note that `@parcel/watcher`'s install script isn't approved. It's an optional file watcher for Sass; the build doesn't need it.

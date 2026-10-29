@@ -3,8 +3,6 @@ services:
     container_name: social-blog-web
     build: .
     restart: unless-stopped
-    env_file:
-      - .env
     ports:
       - "${WEB_PORT:-3000}:80"
     environment:

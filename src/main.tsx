@@ -8,7 +8,8 @@ import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient();
-const router = createRouter({ routeTree });
+// queryClient goes into the router context so route loaders can prefetch data
+const router = createRouter({ routeTree, context: { queryClient } });
 
 // Makes links and params type-safe
 declare module "@tanstack/react-router" {

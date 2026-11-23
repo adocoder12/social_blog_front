@@ -3,6 +3,7 @@ import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import styles from "./Footer.module.scss";
 
 const EMAIL = "adonay.jadal@gmail.com";
+const YEAR = new Date().getFullYear();
 
 const socialLinks = [
   {
@@ -26,8 +27,6 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -55,7 +54,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            &copy; {year} Adonay D'Agosto. All rights reserved.
+            &copy; {YEAR} Adonay D'Agosto. All rights reserved.
           </p>
 
           {/* Social links */}

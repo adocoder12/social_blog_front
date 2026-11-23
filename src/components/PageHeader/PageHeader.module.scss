@@ -1,0 +1,51 @@
+// src/components/PageHeader/PageHeader.module.scss
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  .pageHeader {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: inherit;
+    background-size: cover;
+    background-position: bottom;
+    color: var(--color-black-02);
+
+    // Bleed past .main-container's side padding so it is full width
+    margin-inline: -20px;
+
+    @media (width >= 426px) {
+      padding: 32px 16px;
+    }
+
+    @media (width >= 768px) {
+      padding: 50px 32px;
+      margin-inline: -52px;
+    }
+
+    @media (width >= 992px) {
+      padding: 100px 52px;
+    }
+  }
+
+  // Was: @apply absolute inset-0 z-10
+  .mask {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  // Sits above the mask
+  .title,
+  .subtitle {
+    position: relative;
+    z-index: 11;
+  }
+
+  .subtitle {
+    max-width: 65ch;
+    text-align: justify;
+  }
+}

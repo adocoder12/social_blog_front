@@ -1,0 +1,133 @@
+// src/components/Hero/Hero.module.scss
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  .hero {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px; // on phones
+    overflow: hidden;
+    // Own dark background so the white text is readable on any page background
+    background-color: var(--color-black);
+
+    // Bleed past .main-container's side padding so the hero is full width
+    margin-inline: -20px;
+
+    @media (width >= 768px) {
+      min-height: 720px;
+      margin-inline: -52px;
+    }
+  }
+
+  // Two stacked scrims so the text stays readable:
+  // bottom-up (darkest under the text) and a softer one from the left
+  .mask {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        to top,
+        rgb(0 0 0 / 0.65) 0%,
+        rgb(0 0 0 / 0.4) 30%,
+        rgb(0 0 0 / 0.1) 60%,
+        transparent 100%
+      ),
+      linear-gradient(
+        to right,
+        rgb(0 0 0 / 0.45) 0%,
+        rgb(0 0 0 / 0.15) 40%,
+        transparent 70%
+      );
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1410px;
+    padding: 90px 20px;
+    text-align: start;
+
+    @media (width >= 768px) {
+      padding: 32px;
+    }
+
+    @media (width >= 1024px) {
+      padding: 52px;
+    }
+  }
+
+  // Watermark image, centered behind the text
+  .centerMask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 70vw;
+    height: 70vw;
+    max-width: 600px;
+    max-height: 600px;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+
+    @media (width >= 544px) {
+      width: 50vw;
+      height: 50vw;
+    }
+
+    @media (width >= 768px) {
+      width: 32vw;
+      height: 32vw;
+    }
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 32px;
+
+    @media (width >= 768px) {
+      margin-bottom: 48px;
+    }
+  }
+
+  // Was: mt-4 max-w-4xl text-5xl leading-[1.1] md:text-7xl
+  .title {
+    margin-top: 16px;
+    max-width: 896px;
+    color: var(--color-white-02);
+    font-size: 48px;
+    line-height: 1.1;
+    text-wrap: pretty;
+    word-break: break-word;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 0.45);
+
+    @media (width >= 768px) {
+      font-size: 72px;
+    }
+  }
+
+  // Was: mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground
+  .intro {
+    margin-top: 32px;
+    max-width: 672px;
+    color: var(--color-muted);
+    font-size: 18px;
+    line-height: 1.625;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 0.45);
+  }
+}

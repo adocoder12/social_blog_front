@@ -2,8 +2,8 @@
 
 @theme static {
   /* Base */
-  --color-background: #232925;
-  --color-foreground: #f2f5f3; /* main text color */
+  --color-background: #f2f2f2;
+  --color-foreground: oklch(0.55 0.07 55); /* main text color */
   --color-muted: #a0a0a0; /* placeholders, inactive states */
   --color-decorator: #0fbf3e;
   --color-border: #383838; /* default for every border */
@@ -138,14 +138,14 @@
     width: 100%;
     max-width: 75rem; /* 1200px */
     margin: 0 auto;
-    padding: 2rem 1.25rem;
+    padding: 0 1.25rem;
   }
 
   /* From tablet width up: 52px gap, 48px / 52px padding */
   @media (width >= 48rem) {
     .main-container {
       gap: 3.25rem;
-      padding: 3rem 3.25rem;
+      padding: 0 3.25rem;
     }
   }
 }

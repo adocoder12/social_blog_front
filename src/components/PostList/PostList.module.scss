@@ -1,0 +1,11 @@
+// src/components/PostList/PostList.module.scss
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  // Was: border-t (each Post adds its own bottom border)
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-border);
+  }
+}

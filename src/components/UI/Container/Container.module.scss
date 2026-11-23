@@ -1,0 +1,11 @@
+// src/components/UI/Container/Container.module.scss
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  // Groups items that belong together with a small gap.
+  // .main-container already sets the max width and side padding.
+  .container {
+    display: grid;
+    gap: 4px;
+    width: 100%;
+  }
+}

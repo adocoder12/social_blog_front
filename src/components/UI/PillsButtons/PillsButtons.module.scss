@@ -1,0 +1,63 @@
+// src/components/UI/PillsButtons/PillsButtons.module.scss
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media (width >= 768px) {
+      gap: 12px;
+    }
+  }
+
+  // Was: eyebrow border px-4 py-2 transition-colors hover:border-foreground
+  .pill {
+    // eyebrow: small uppercase label
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-foreground);
+    white-space: nowrap;
+    cursor: pointer;
+    transition-property: color, background-color, border-color;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      border-color: var(--color-foreground);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-decorator);
+      outline-offset: 2px;
+    }
+  }
+
+  // Was: border-foreground bg-foreground text-background
+  .active {
+    border-color: var(--color-foreground);
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  // No transitions for people who turned motion off in their system settings
+  @media (prefers-reduced-motion: reduce) {
+    .pill {
+      transition: none;
+    }
+  }
+}

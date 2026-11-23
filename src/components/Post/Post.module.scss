@@ -1,9 +1,13 @@
 // src/components/Post/Post.module.scss
 // Wrapped in the components layer so Tailwind utilities can still override it
 @layer components {
-  // Was: border-b
+  // Was: border-b. A line between posts, but none under the last one
   .post {
     border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   // Was: group grid gap-2 py-10 md:grid-cols-[1fr_2fr_auto] md:items-baseline md:gap-10

@@ -1,4 +1,6 @@
 import type { CSSProperties } from "react";
+import { Link } from "@tanstack/react-router";
+
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import styles from "./Footer.module.scss";
 
@@ -30,27 +32,29 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        {/* <div className={styles.top}>
-
+        <div className={styles.top}>
           <div className={styles.column}>
-            <p className={styles.brand}>Base setup react</p>
+            <Link to="/" className={styles.brand}>
+              Go.Blog
+            </Link>
             <p className={styles.quote}>
               “Talk is cheap. Show me the code.”
               <br />— Linus Torvalds
             </p>
           </div>
 
-
+          {/* 
           <div className={styles.column}>
             <p className={styles.heading}>Contact</p>
             <a href={`mailto:${EMAIL}`} className={styles.email}>
               <FaEnvelope size={14} className={styles.emailIcon} />
               {EMAIL}
             </a>
-          </div>
-        </div> */}
+            </div> 
+          */}
+        </div>
 
-        {/* <hr className={styles.divider} /> */}
+        <hr className={styles.divider} />
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>

@@ -26,7 +26,7 @@ export default function Header() {
     <header className={cn(styles.header, isScrolled && styles.scrolled)}>
       <div className={styles.inner}>
         <Link to="/" className={styles.brand}>
-          Go.notes
+          Go.Blog
         </Link>
 
         <Navbar toggleMenu={toggleMenu}>

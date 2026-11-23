@@ -7,7 +7,7 @@ export const postKeys = {
   detail: (id: number) => [...postKeys.all, "detail", id] as const,
 };
 
-// Shared by usePost and the post route's loader, so both use the same cache entry
+// this  is a helper function to create the query options for a single post, given its id
 export const postQueryOptions = (id: number) =>
   queryOptions({
     queryKey: postKeys.detail(id),
@@ -21,6 +21,7 @@ export function usePosts() {
   });
 }
 
+// get a single post by id from the server and cache it in the react-query cache
 export function usePost(id: number) {
   return useQuery(postQueryOptions(id));
 }

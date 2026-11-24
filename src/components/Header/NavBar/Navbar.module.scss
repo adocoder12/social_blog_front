@@ -41,7 +41,7 @@
     flex-direction: column;
     row-gap: 2.5rem;
     list-style: none;
-    text-transform: uppercase;
+    text-transform: Capitalize;
 
     @media (width >= 64rem) {
       flex-direction: row;

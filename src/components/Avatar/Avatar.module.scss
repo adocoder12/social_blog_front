@@ -1,0 +1,25 @@
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  // A circle with the initials centered. Change the size with a className like size-16;
+  // the initials are in em, so they grow with it.
+  .avatar {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--color-foreground);
+    font-size: 1rem;
+  }
+
+  // White on the foreground color passes 4.5:1
+  .initials {
+    font-size: 0.9em;
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+}

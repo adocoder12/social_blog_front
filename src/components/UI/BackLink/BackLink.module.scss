@@ -1,0 +1,41 @@
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  // No outer margin: each page sets its own spacing with a className (e.g. mt-16)
+  .back {
+    display: inline-flex;
+    justify-self: start; // in a grid parent (like .main-container), don't stretch to full width
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid currentColor;
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-black-02);
+    text-decoration: none;
+
+    &::before {
+      content: "←";
+      transition: translate 150ms ease;
+    }
+
+    &:hover::before {
+      translate: -4px 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-decorator);
+      outline-offset: 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back::before {
+      transition: none;
+    }
+  }
+}

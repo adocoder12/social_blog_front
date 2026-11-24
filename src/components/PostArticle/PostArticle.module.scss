@@ -7,33 +7,23 @@
     width: 100%;
     max-width: 768px;
     margin-inline: auto;
-    padding-top: 40px;
+    padding: 40px 0;
   }
 
-  // Was: eyebrow
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    line-height: 1.4;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-black-03);
-  }
-
-  // Was: font-display mt-6 text-5xl leading-[1.1] md:text-6xl
   .title {
     margin-top: 24px;
     font-size: 48px;
     line-height: 1.1;
     color: var(--color-black-02);
+    font-weight: var(--font-weight-regular);
+
     text-wrap: balance;
 
     @media (width >= 768px) {
-      font-size: 60px;
+      font-size: 50px;
     }
   }
 
-  // Was: mt-8 text-xl leading-relaxed text-muted-foreground
   .lead {
     margin-top: 32px;
     font-size: 20px;
@@ -53,13 +43,11 @@
     color: var(--color-black-02);
   }
 
-  // Was: link-arrow mt-16
   .back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin-top: 64px;
-    font-family: var(--font-mono);
     font-size: var(--text-small);
     text-transform: uppercase;
     letter-spacing: 0.1em;

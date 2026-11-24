@@ -35,5 +35,9 @@ function PostPage() {
 
   if (!post) return null;
 
-  return <PostArticle post={post} />;
+  return (
+    <>
+      <PostArticle post={post} />
+    </>
+  );
 }

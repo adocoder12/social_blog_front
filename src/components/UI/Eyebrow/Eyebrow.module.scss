@@ -1,0 +1,10 @@
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  .eyebrow {
+    font-size: var(--text-small);
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-black-03);
+  }
+}

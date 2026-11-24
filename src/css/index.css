@@ -1,8 +1,74 @@
 @import "tailwindcss";
 
+/* Nudica, self-hosted from public/fonts/nudica. woff2 only: every Baseline browser supports it.
+   The browser downloads a file only when text on the page uses that weight/style. */
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-thin-webfont.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-ultralight-webfont.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-light-webfont.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-regularitalic-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-medium-webfont.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-mediumitalic-webfont.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-bold-webfont.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nudica";
+  src: url("/fonts/nudica/nudica-bolditalic-webfont.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme static {
   /* Base */
-  --color-background: #f2f2f2;
+  --color-background: oklch(0.975 0.008 85); /* light gray background */
   --color-foreground: oklch(0.55 0.07 55); /* main text color */
   --color-muted: #a0a0a0; /* placeholders, inactive states */
   --color-decorator: #0fbf3e;
@@ -24,9 +90,8 @@
   --color-white-02: #f7f7f7;
   --color-white-03: #e8e8e8;
 
-  /* Fonts: mono for identity and UI, serif for reading */
-  --font-mono: "Courier Prime", ui-monospace, monospace;
-  --font-serif: "Source Serif 4", Georgia, serif;
+  /* Font: Nudica everywhere (Tailwind's font-sans) */
+  --font-sans: "Nudica", ui-sans-serif, system-ui, sans-serif;
 
   --font-weight-light: 300;
   --font-weight-regular: 400;
@@ -67,24 +132,28 @@
     border-color: var(--color-border);
   }
 
+  html {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
   body {
     min-width: 320px;
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Headings carry the Courier Prime identity; a class like text-h3 still overrides */
+  /* A class like text-h3 still overrides these */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    font-family: var(--font-mono);
     font-weight: var(--font-weight-bold);
   }
   h1 {
@@ -110,15 +179,6 @@
   h6 {
     font-size: var(--text-h6);
     line-height: var(--text-h6--line-height);
-  }
-
-  /* UI elements use the mono font too */
-  button,
-  input,
-  textarea,
-  select,
-  nav {
-    font-family: var(--font-mono);
   }
 }
 
@@ -148,4 +208,11 @@
       padding: 0 3.25rem;
     }
   }
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
 }

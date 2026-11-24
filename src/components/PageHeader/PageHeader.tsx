@@ -17,8 +17,8 @@ export default function PageHeader({
       style={imageUrl ? { backgroundImage: `url('${imageUrl}')` } : undefined}
     >
       <div className={styles.mask} />
-      <h1 className={styles.title}>{title}</h1>
-      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+      {subtitle && <p className={styles.title}>{title}</p>}
+      <h1 className={styles.subtitle}>{subtitle}</h1>
     </section>
   );
 }

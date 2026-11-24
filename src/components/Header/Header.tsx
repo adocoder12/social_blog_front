@@ -8,7 +8,8 @@ import { cn } from "@utils/cn";
 import styles from "./Header.module.scss";
 
 const navLinks = [
-  { name: "Feed", link: "/" },
+  { name: "Home", link: "/" },
+  { name: "Feed", link: "/feed" },
   { name: "Profile", link: "/profile" },
 ];
 

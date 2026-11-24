@@ -18,10 +18,12 @@
     color: inherit;
     text-decoration: none;
 
-    @media (width >= 768px) {
+    // padding-inline puts back the space PostList removes, so text lines up with the page
+    @media (width >= 48rem) {
       grid-template-columns: 1fr 2fr auto;
       align-items: baseline;
       gap: 40px;
+      padding-inline: 3.25rem;
     }
 
     &:focus {
@@ -34,23 +36,13 @@
     }
   }
 
-  // Was: eyebrow
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    line-height: 1.4;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-black-03);
-  }
-
   // Was: font-display block text-3xl transition-colors group-hover:text-primary
   .title {
     display: block;
-    font-family: var(--font-mono);
-    font-size: 30px;
+    font-size: var(--text-h3);
     font-weight: var(--font-weight-bold);
-    line-height: 1.2;
+    line-height: var(--text-h3--line-height);
+    overflow-wrap: anywhere; // a very long word can't push the page wider on phones
     color: var(--color-black-02);
     transition: color 150ms ease;
 
@@ -59,7 +51,6 @@
     }
   }
 
-  // Was: mt-2 block text-muted-foreground (plus a 2-line preview)
   .excerpt {
     display: -webkit-box;
     margin-top: 8px;

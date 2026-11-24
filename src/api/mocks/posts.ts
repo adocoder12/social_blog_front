@@ -1,7 +1,8 @@
 import type { Post } from "@app-types";
+import { mockUsers } from "./users";
 
 // Mock data until the Go API is connected
-export const mockPosts: Post[] = [
+const posts: Post[] = [
   {
     id: 1,
     title: "Why I switched my side projects to Go",
@@ -68,7 +69,8 @@ export const mockPosts: Post[] = [
         id: 5,
         post_id: 3,
         user_id: 2,
-        content: "Finally it makes sense.",
+        content:
+          "We switched to errgroup recently. Having cancellation tied to the whole group removed a lot of cleanup code.",
         created_at: "2026-11-22T14:00:00Z",
       },
       {
@@ -121,7 +123,8 @@ export const mockPosts: Post[] = [
         id: 9,
         post_id: 5,
         user_id: 3,
-        content: "The DTO tip saved me.",
+        content:
+          "We switched to errgroup recently. Having cancellation tied to the whole group removed a lot of cleanup code.",
         created_at: "2026-11-21T20:00:00Z",
       },
       {
@@ -137,3 +140,12 @@ export const mockPosts: Post[] = [
     updated_at: "2026-11-21T16:00:00Z",
   },
 ];
+
+// The Go API joins the author's username onto each comment, so the mock does too
+export const mockPosts: Post[] = posts.map((post) => ({
+  ...post,
+  comments: post.comments.map((comment) => ({
+    ...comment,
+    username: mockUsers.find((user) => user.id === comment.user_id)?.username,
+  })),
+}));

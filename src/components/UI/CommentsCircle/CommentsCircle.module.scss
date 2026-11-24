@@ -1,0 +1,17 @@
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  // Font and color come from the parent, so it matches the text around it
+  .count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375em;
+    vertical-align: bottom;
+  }
+
+  // Sized in em so the icon scales with the text
+  .icon {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+  }
+}

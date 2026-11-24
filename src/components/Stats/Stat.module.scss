@@ -1,0 +1,9 @@
+// Wrapped in the components layer so Tailwind utilities can still override it
+@layer components {
+  // The number; the label below it is an Eyebrow
+  .value {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--text-h2--line-height);
+    color: var(--color-black-02);
+  }
+}

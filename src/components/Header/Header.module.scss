@@ -3,7 +3,7 @@
   .header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 50;
     width: 100%;
     padding-block: 1.5rem;
     background-color: var(--color-background);
@@ -43,8 +43,7 @@
 
   .brand {
     position: relative;
-    z-index: 20; /* stays above the mobile menu */
-    font-family: var(--font-mono);
+    z-index: 80000; /* stays above the mobile menu */
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: var(--font-weight-bold);
@@ -55,7 +54,7 @@
 
   .toggleWrapper {
     position: relative;
-    z-index: 20; /* stays above the mobile menu */
+    z-index: 80000; /* stays above the mobile menu */
     display: flex;
     align-items: center;
 

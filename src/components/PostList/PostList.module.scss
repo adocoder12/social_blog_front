@@ -1,7 +1,19 @@
-// src/components/PostList/PostList.module.scss
-// Wrapped in the components layer so Tailwind utilities can still override it
 @layer components {
-  // Was: border-t (each Post adds its own bottom border)
+  .postList {
+    padding-bottom: 1rem;
+
+    // Undo .main-container's side padding so the divider lines run edge to edge.
+    // Post.module.scss adds the same padding back inside each post.
+    @media (width >= 48rem) {
+      padding-bottom: 2rem;
+      margin-inline: -3.25rem;
+    }
+
+    @media (width >= 64rem) {
+      padding-bottom: 3.25rem;
+    }
+  }
+
   .list {
     margin: 0;
     padding: 0;

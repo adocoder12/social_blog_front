@@ -1,7 +1,9 @@
 import type { Post } from "@app-types";
-import { Link } from "@tanstack/react-router";
 import { formatDate, readMinutes } from "@utils/posts";
 import styles from "./PostArticle.module.scss";
+import PostComments from "@components/PostComments/PostComments";
+import BackLink from "@components/UI/BackLink/BackLink";
+import Eyebrow from "@components/UI/Eyebrow/Eyebrow";
 
 type PostArticleProps = {
   post: Post;
@@ -16,11 +18,11 @@ export default function PostArticle({ post }: PostArticleProps) {
 
   return (
     <article className={styles.article}>
-      <p className={styles.eyebrow}>
+      <Eyebrow>
         {post.tags[0] ?? "general"} ·{" "}
         <time dateTime={post.created_at}>{formatDate(post.created_at)}</time> ·{" "}
         {readMinutes(post.content)} min
-      </p>
+      </Eyebrow>
 
       <h1 className={styles.title}>{post.title}</h1>
 
@@ -34,9 +36,11 @@ export default function PostArticle({ post }: PostArticleProps) {
         </div>
       )}
 
-      <Link to="/" className={styles.back}>
+      <PostComments comments={post.comments} />
+
+      <BackLink to="/feed" className="mt-16">
         Back to all writing
-      </Link>
+      </BackLink>
     </article>
   );
 }

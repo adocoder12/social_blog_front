@@ -30,3 +30,8 @@ dist-ssr
 
 # TanStack Router plugin temp files
 .tanstack
+
+# Agent skills: installed copies (skills-lock.json is committed)
+.agents/
+.claude/skills/
+.claude/settings.local.json

@@ -29,7 +29,7 @@ function Homepage() {
   const { data: posts, isPending, isError } = usePosts();
 
   // "All" = newest first, "Popular" = most comments first
-  const sorted = [...(posts ?? [])].sort((a, b) =>
+  const sorted = (posts ?? []).toSorted((a, b) =>
     filter === "popular"
       ? b.comments.length - a.comments.length
       : b.created_at.localeCompare(a.created_at),
